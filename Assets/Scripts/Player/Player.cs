@@ -11,8 +11,10 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float _speed = 5;
 
+    // TODO: Move to core game or game config
     private const string _groundTag = "Ground";
 
+    private InteractableObject _interactableObject;
     private Vector2 _directionMove;
     private bool _isJump;
 
@@ -21,13 +23,14 @@ public class Player : MonoBehaviour
         _playerController.SetUp();
         _playerController.WhenDirectionMoveChanged += OnSetDirection;
         _playerController.WhenJumped += OnJump;
+        _playerController.WhenInteracted += OnInteract;
     }
 
     private void OnDisable()
     {
         _playerController.UnsubscribeInput();
         _playerController.WhenDirectionMoveChanged -= OnSetDirection;
-        _playerController.WhenJumped -= OnJump;
+        _playerController.WhenInteracted -= OnInteract;
     }
 
     private void Update()
@@ -43,6 +46,16 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        collision.TryGetComponent(out _interactableObject);
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        _interactableObject = null;
+    }
+
     private void OnSetDirection(Vector2 directionMove)
     {
         this._directionMove = directionMove;
@@ -54,6 +67,14 @@ public class Player : MonoBehaviour
         {
             _rigidbody2D.AddForce(Vector2.up * _speed, ForceMode2D.Impulse);
             _isJump = true;
+        }
+    }
+
+    private void OnInteract()
+    {
+        if (_interactableObject != null)
+        {
+            _interactableObject.Interact();
         }
     }
 }
