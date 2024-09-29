@@ -91,9 +91,7 @@ public class TimeHopUI : MonoBehaviour
 
         while (_timePhaseSlider.value < endPoint && currentTimeOut < _timeout)
         {
-            float timeValue = _timePhaseSlider.value;
-
-            if (timeValue + _timePhaseSliderPoint >= endPoint)
+            if (_timePhaseSlider.value + _timePhaseSliderPoint >= endPoint)
             {
                 _timePhaseSlider.value = endPoint;
             }
