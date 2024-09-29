@@ -8,5 +8,9 @@
 22:00-01:00 | Implement Inventory System ( 3h )
 * Problem : Can't get mouse position value correctly.
 
+30/09/2024
+01:00-01:30 | Fix get wrong mouse position ( 30m )
+* Problem : Merge item stack work incorrect.
+
 = Inventory System =
 I've never made a game with an inventory system before, so it was quite challenging to manage the data and design the structure in this system.
