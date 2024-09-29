@@ -117,6 +117,6 @@ public class TimeHopUI : MonoBehaviour
 
     private void OnUpdateDayNumberUI(int dayNumber)
     {
-        _dayNumberLabel.text = dayNumber.ToString();
+        _dayNumberLabel.text = $"Day {dayNumber.ToString()}"; 
     }
 }
