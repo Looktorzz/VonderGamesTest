@@ -13,10 +13,7 @@ public class PlayerController : MonoBehaviour
 
     public void SetUp()
     {
-        if (!_isInit)
-        {
-            Init();
-        }
+        Init();
 
         _inputSystem.Enable();
 
@@ -40,8 +37,13 @@ public class PlayerController : MonoBehaviour
 
     private void Init()
     {
-        _isInit = true;
+        if (_isInit)
+        {
+            return;
+        }
+
         _inputSystem = new InputSystem();
+        _isInit = true;
     }
 
     private void OnMovementPerformed(InputAction.CallbackContext value)
