@@ -19,7 +19,7 @@ public class ItemUI : MonoBehaviour
 
     public ItemData ItemData { get; private set; }
 
-    public int StackAmount { get; set; }
+    public int StackAmount { get; private set; }
 
     public void SetUp(int id, int stackAmount)
     {
@@ -29,5 +29,11 @@ public class ItemUI : MonoBehaviour
         _itemImage.sprite = ItemData.ItemSprite;
         _stackAmountLabel.text = StackAmount.ToString();
         ItemCanvaGroup.blocksRaycasts = true;
+    }
+
+    public void SetStackAmount(int stackAmount)
+    {
+        StackAmount = stackAmount;
+        _stackAmountLabel.text = StackAmount.ToString();
     }
 }

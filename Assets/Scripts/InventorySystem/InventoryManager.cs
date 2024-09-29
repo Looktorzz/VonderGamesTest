@@ -88,7 +88,7 @@ public class InventoryManager : MonoBehaviour
         if (slot.HasItem && TryToMergeItemUI(slot.ItemUI, _currentHoldItem))
         {
             // Destroy current hold item.
-            Destroy(_currentHoldItem);
+            Destroy(_currentHoldItem.gameObject);
             _currentHoldItem = null;
         }
 
@@ -99,25 +99,6 @@ public class InventoryManager : MonoBehaviour
             slot.SetItemInSlot(_currentHoldItem);
             _currentHoldItem = null;
         }
-
-
-        // Test
-        /*_currentHoldItem = item;
-        if (item != null)
-        {
-            if (item.activeSlot.myTag != SlotTag.None && item.activeSlot.myTag != item.myItem.itemTag)
-            {
-                return;
-            }
-            item.activeSlot.SetItem(item);
-        }
-
-        if (item.activeSlot.myTag != SlotTag.None)
-        { EquipEquipment(item.activeSlot.myTag, null); }
-
-        item = item;
-        item.canvasGroup.blocksRaycasts = false;
-        item.transform.SetParent(draggablesTransform);*/
     }
 
     public bool TryToMergeItemUI(ItemUI itemInSlot, ItemUI newItem)
@@ -127,8 +108,12 @@ public class InventoryManager : MonoBehaviour
             return false;
         }
 
+        int itemStackAmount = itemInSlot.StackAmount;
+        int newItemStackAmount = newItem.StackAmount;
+        int maxStackAmount = itemInSlot.ItemData.MaxStack;
+
         bool isSameId = itemInSlot.ItemData.Id == newItem.ItemData.Id;
-        bool isStackable = itemInSlot.StackAmount + newItem.StackAmount <= itemInSlot.ItemData.MaxStack;
+        bool isStackable = itemStackAmount + newItemStackAmount <= maxStackAmount;
 
         if (!isSameId)
         {
@@ -137,12 +122,17 @@ public class InventoryManager : MonoBehaviour
 
         if (isStackable)
         {
-            itemInSlot.StackAmount += newItem.StackAmount;
+            itemStackAmount += newItem.StackAmount;
+            itemInSlot.SetStackAmount(itemStackAmount);
+
             return true;
         }
 
-        newItem.StackAmount -= itemInSlot.ItemData.MaxStack - itemInSlot.StackAmount;
-        itemInSlot.StackAmount = itemInSlot.ItemData.MaxStack;
+        newItemStackAmount -= maxStackAmount - itemStackAmount;
+        itemStackAmount = maxStackAmount;
+        newItem.SetStackAmount(newItemStackAmount);
+        itemInSlot.SetStackAmount(itemStackAmount);
+
         return false;
     }
 }
