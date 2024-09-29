@@ -25,21 +25,14 @@ public class InventoryManager : MonoBehaviour
             return;
         }
 
-        // Assuming you have a reference to your Canvas
         RectTransformUtility.ScreenPointToLocalPointInRectangle(
             _canvas.transform as RectTransform,
-        Input.mousePosition,
-        _canvas.worldCamera, // Pass your canvas's world camera, or null if it uses Screen Space - Overlay
+            Input.mousePosition,
+            _canvas.worldCamera,
             out Vector2 localPoint
         );
 
         _currentHoldItem.transform.localPosition = localPoint;
-
-
-        /*float mousePositionX = Input.mousePosition.x;
-        float mousePositionY = Input.mousePosition.y;
-        float currentPositionZ = _currentHoldItem.transform.position.z;
-        _currentHoldItem.transform.position = new Vector3(mousePositionX, mousePositionY, currentPositionZ);*/
     }
 
     public void TestSpawnItemUI()
@@ -84,6 +77,7 @@ public class InventoryManager : MonoBehaviour
             if (slot.HasItem)
             {
                 _currentHoldItem = slot.ReturnItemInSlot();
+                _currentHoldItem.transform.SetParent(_canvas.transform);
                 _currentHoldItem.ItemCanvaGroup.blocksRaycasts = false;
             }
 
