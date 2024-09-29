@@ -104,7 +104,7 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""7c26562b-5e06-4e2d-8b52-16ca2d5d352c"",
                     ""path"": ""<Keyboard>/space"",
-                    ""interactions"": """",
+                    ""interactions"": ""Press"",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Jump"",
