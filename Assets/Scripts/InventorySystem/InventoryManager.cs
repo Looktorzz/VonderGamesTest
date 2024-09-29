@@ -37,9 +37,13 @@ public class InventoryManager : MonoBehaviour
 
     public void TestSpawnItemUI()
     {
-        ItemUI itemUI = Instantiate(_itemUIPrefab);
-        itemUI.SetUp(0, 3);
-        AddItemInSlot(itemUI);
+        ItemUI itemUI1 = Instantiate(_itemUIPrefab);
+        itemUI1.SetUp(0, 3);
+        AddItemInSlot(itemUI1);
+
+        ItemUI itemUI2 = Instantiate(_itemUIPrefab);
+        itemUI2.SetUp(1, 1);
+        AddItemInSlot(itemUI2);
     }
 
     public void AddItemInSlot(ItemUI item)
