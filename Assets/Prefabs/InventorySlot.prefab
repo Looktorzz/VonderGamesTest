@@ -88,3 +88,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f128cfb4589774438a8c609bc397e89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _slotImage: {fileID: 5845381680165714296}
+  _isHotBar: 0

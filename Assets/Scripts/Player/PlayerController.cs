@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
 
         _inputSystem.Player.Jump.started += OnJumpStarted;
         _inputSystem.Player.Interact.started += OnInteractStarted;
+        _inputSystem.Player.Inventory.started += OnOpenInventoryStarted;
     }
 
     public void UnsubscribeInput()
@@ -31,6 +32,7 @@ public class PlayerController : MonoBehaviour
 
         _inputSystem.Player.Jump.started -= OnJumpStarted;
         _inputSystem.Player.Interact.started -= OnInteractStarted;
+        _inputSystem.Player.Inventory.started -= OnOpenInventoryStarted;
 
         _inputSystem.Disable();
     }
@@ -72,6 +74,14 @@ public class PlayerController : MonoBehaviour
         if (value.ReadValueAsButton())
         {
             WhenInteracted?.Invoke();
+        }
+    }
+
+    private void OnOpenInventoryStarted(InputAction.CallbackContext value)
+    {
+        if (value.ReadValueAsButton())
+        {
+            CoreGame.Instance.InventoryManager.OpenInventory();
         }
     }
 }

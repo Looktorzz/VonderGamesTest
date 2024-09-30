@@ -1,6 +1,6 @@
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InventoryManager : MonoBehaviour
 {
@@ -16,9 +16,19 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] 
     private Canvas _canvas;
 
-    private ItemUI _currentHoldItem;
+    [SerializeField]
+    private Image _inventorySlotGroupImage;
 
-    void Update()
+    [SerializeField]
+    private Image _hotBarSlotsGroupImage;
+
+    public bool IsOpenInventory { get; private set; }
+
+    private bool _isInit;
+    private ItemUI _currentHoldItem;
+    private InventorySlot _currentSelectedSlot;
+
+    private void Update()
     {
         if (_currentHoldItem == null)
         {
@@ -33,6 +43,49 @@ public class InventoryManager : MonoBehaviour
         );
 
         _currentHoldItem.transform.localPosition = localPoint;
+    }
+
+    public void Init()
+    {
+        if (_isInit)
+        {
+            return;
+        }
+
+        GameConfig gameConfig = CoreGame.Instance.GameConfig;
+
+        _inventorySlotGroupImage.color = gameConfig.CloseInventoryColor;
+        _hotBarSlotsGroupImage.color = gameConfig.CloseInventoryColor;
+        IsOpenInventory = false;
+
+        _isInit = true;
+    }
+
+    public void OpenInventory()
+    {
+        if (_currentHoldItem != null)
+        {
+            return;
+        }
+
+        GameConfig gameConfig = CoreGame.Instance.GameConfig;
+        Color openInventoryColor = gameConfig.OpenInventoryColor;
+        Color closeInventoryColor = gameConfig.CloseInventoryColor;
+
+        IsOpenInventory = !IsOpenInventory;
+        _inventorySlotGroupImage.color = IsOpenInventory ? openInventoryColor : closeInventoryColor;
+        _hotBarSlotsGroupImage.color = IsOpenInventory ? openInventoryColor : closeInventoryColor;
+    }
+
+    public void SelectSlot(InventorySlot inventorySlot)
+    {
+        if (_currentSelectedSlot != null)
+        {
+            _currentSelectedSlot.SetSelectBackgroundUI(false);
+        }
+
+        _currentSelectedSlot = inventorySlot;
+        _currentSelectedSlot.SetSelectBackgroundUI(true);
     }
 
     public void TestSpawnItemUI()
@@ -72,6 +125,17 @@ public class InventoryManager : MonoBehaviour
         }
 
         Debug.Log($"Cannot add items: Inventory is full.");
+    }
+
+    public void RemoveItem()
+    {
+        if (_currentHoldItem == null)
+        {
+            return;
+        }
+
+        Destroy(_currentHoldItem.gameObject);
+        _currentHoldItem = null;
     }
 
     public void SetCurrentHoldItem(InventorySlot slot)

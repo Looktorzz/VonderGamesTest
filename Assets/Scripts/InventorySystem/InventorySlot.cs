@@ -1,17 +1,43 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class InventorySlot : MonoBehaviour, IPointerClickHandler
 {
+    [SerializeField]
+    private Image _slotImage;
+
+    [SerializeField]
+    private bool _isHotBar = false;
+
     public ItemUI ItemUI { get; private set; }
     public bool HasItem { get; private set; }
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (eventData.button == PointerEventData.InputButton.Left)
+        bool isLeftMouseButton = eventData.button == PointerEventData.InputButton.Left;
+        bool isOpenInventory = CoreGame.Instance.InventoryManager.IsOpenInventory;
+
+        if (!isLeftMouseButton)
+        {
+            return;
+        }
+
+        if (isOpenInventory)
         {
             CoreGame.Instance.InventoryManager.SetCurrentHoldItem(this);
         }
+        else if (_isHotBar)
+        {
+            CoreGame.Instance.InventoryManager.SelectSlot(this);
+        }
+    }
+
+    public void SetSelectBackgroundUI(bool isSelected)
+    {
+        GameConfig gameConfig = CoreGame.Instance.GameConfig;
+
+        _slotImage.color = isSelected ? gameConfig.SelectedSlotColor : gameConfig.NormalSlotColor;
     }
 
     public void SetItemInSlot(ItemUI item)

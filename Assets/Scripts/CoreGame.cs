@@ -1,10 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class CoreGame : Singleton<CoreGame>
 {
+    [SerializeField]
+    private GameConfig _gameConfig;
+    public GameConfig GameConfig => _gameConfig;
+
     [SerializeField]
     private ItemDataConfig _itemDataConfig;
     public ItemDataConfig ItemDataConfig => _itemDataConfig;
@@ -21,6 +22,7 @@ public class CoreGame : Singleton<CoreGame>
 
     private void Start()
     {
+        _inventoryManager.Init();
         _timeHopController.Init();
         _timeHopUI.Setup();
     }
