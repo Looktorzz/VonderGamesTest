@@ -15,5 +15,8 @@ Solve by item ui parent at canvas and change logic get mouse position.
 Solve by update text and destroy game object not script.
 01:30-02:00 | Fix can't merge item ui ( 30m )
 
+20:30-22:00 | Implement remove item from inventory and select item from hot bar ( 1h 30m )
+22:00-22:30 | Change logic time hop trigger ( 30m )
+
 = Inventory System =
 I've never made a game with an inventory system before, so it was quite challenging to manage the data and design the structure in this system.
