@@ -16,6 +16,7 @@ public class CoreGame : Singleton<CoreGame>
 
     [SerializeField]
     private TimeHopController _timeHopController;
+    public TimeHopController TimeHopController => _timeHopController;
 
     [SerializeField]
     private TimeHopUI _timeHopUI;

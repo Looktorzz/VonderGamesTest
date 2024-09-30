@@ -17,4 +17,7 @@ public class GameConfig : MonoBehaviour
     [SerializeField]
     private Color _selectedSlotColor;
     public Color SelectedSlotColor => _selectedSlotColor;
+
+    public const string GroundTag = "Ground";
+    public const string PlayerTag = "Player";
 }
