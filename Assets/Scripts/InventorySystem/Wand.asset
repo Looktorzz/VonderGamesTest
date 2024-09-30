@@ -16,3 +16,4 @@ MonoBehaviour:
   _itemName: Wand
   _itemSprite: {fileID: 21300000, guid: d921ff717fd80a449b6011e71bf0a8e3, type: 3}
   _maxStack: 1
+  _itemType: 1

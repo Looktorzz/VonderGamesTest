@@ -19,4 +19,8 @@ public class ItemData : ScriptableObject
     [SerializeField]
     private int _maxStack;
     public int MaxStack => _maxStack;
+
+    [SerializeField]
+    private ItemType _itemType;
+    public ItemType ItemType => _itemType;
 }

@@ -16,3 +16,4 @@ MonoBehaviour:
   _itemName: Lumber
   _itemSprite: {fileID: 21300000, guid: b660b851abd45354eb6aa0782423227c, type: 3}
   _maxStack: 10
+  _itemType: 2
