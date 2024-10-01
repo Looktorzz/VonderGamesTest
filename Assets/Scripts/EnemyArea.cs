@@ -9,4 +9,12 @@ public class EnemyArea : MonoBehaviour
             CoreGame.Instance.TimeHopController.OnTimeChanged();
         }
     }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.TryGetComponent(out Player player))
+        {
+            player.SetUp();
+        }
+    }
 }
