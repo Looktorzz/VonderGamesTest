@@ -20,7 +20,7 @@ Solve by update text and destroy game object not script.
 23:00-00:30 | Implement enemy AI ( 1h 30m )
 
 01/10/2024
-
+20:30-21:30 | Implement base entity ( 1h )
 
 = Inventory System =
 I've never made a game with an inventory system before, so it was quite challenging to manage the data and design the structure in this system.
