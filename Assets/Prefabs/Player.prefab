@@ -185,6 +185,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Rigidbody2D: {fileID: 3926393049554659787}
-  MaxHp: 20
+  MaxHp: 100
   Speed: 5
   _playerController: {fileID: 2469865158153384347}

@@ -4,7 +4,7 @@ public abstract class BaseEnemy : BaseEntity
 {
     [SerializeField]
     private int _damage = 3;
-    public float Damage => _damage;
+    public int Damage => _damage;
 
     [SerializeField]
     private float _detectionRange = 5f;

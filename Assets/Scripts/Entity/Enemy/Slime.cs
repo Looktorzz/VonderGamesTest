@@ -10,6 +10,7 @@ public sealed class Slime : BaseEnemy
     public override void Attack(Player player)
     {
         Debug.Log("Attacking the player!");
+        player.Hurt(Damage);
     }
 
     protected override void Dead()

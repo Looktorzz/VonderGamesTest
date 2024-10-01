@@ -15,7 +15,12 @@ public abstract class BaseEntity : MonoBehaviour
 
     protected int Hp;
 
-    public void SetUp()
+    private void Start()
+    {
+        SetUp(); 
+    }
+
+    public virtual void SetUp()
     {
         ResetHp();
     }
@@ -28,6 +33,7 @@ public abstract class BaseEntity : MonoBehaviour
     protected virtual void ReduceHp(int damage)
     {
         Hp -= damage;
+        Debug.Log($"{this.name} hp remaining : {Hp}");
 
         if (Hp <= 0)
         {
@@ -39,10 +45,12 @@ public abstract class BaseEntity : MonoBehaviour
     protected virtual void ResetHp()
     {
         Hp = MaxHp;
+        Debug.Log($"{this.name} Reset to max hp : {Hp}/{MaxHp}");
     }
 
     protected virtual void Dead()
     {
+        Debug.Log($"{this.name} dead!");
         Destroy(this.gameObject);
     }
 }

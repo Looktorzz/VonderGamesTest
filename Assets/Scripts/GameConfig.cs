@@ -18,6 +18,10 @@ public class GameConfig : MonoBehaviour
     private Color _selectedSlotColor;
     public Color SelectedSlotColor => _selectedSlotColor;
 
+    [SerializeField]
+    private Vector3 _playerSpawnPosition;
+    public Vector3 PlayerSpawnPosition => _playerSpawnPosition;
+
     public const string GroundTag = "Ground";
     public const string PlayerTag = "Player";
 }

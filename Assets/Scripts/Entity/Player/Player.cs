@@ -37,15 +37,14 @@ public class Player : BaseEntity
         }
     }
 
-    /*private void OnTriggerEnter2D(Collider2D collision)
+    protected override void Dead()
     {
-        collision.TryGetComponent(out _interactableObject);
-    }
+        Debug.Log($"{this.name} dead!");
 
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        _interactableObject = null;
-    }*/
+        transform.position = CoreGame.Instance.GameConfig.PlayerSpawnPosition;
+        CoreGame.Instance.TimeHopController.OnTimeChanged();
+        SetUp();
+    }
 
     private void OnSetDirection(Vector2 directionMove)
     {
