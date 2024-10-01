@@ -22,9 +22,30 @@ Solve by update text and destroy game object not script.
 01/10/2024
 20:30-21:30 | Implement base entity ( 1h )
 21:30-23:30 | Implement combat system ( 2h )
+23:30-00:30 | Update log ( 1h )
 
 = Inventory System =
 I've never made a game with an inventory system before, so it was quite challenging to manage the data and design the structure in this system.
 
 = Time =
-Due to limited time, it was very difficult for me to allocate time to design the code structure properly. As a result, many parts of the code have an inappropriate structure and were intended to be temporary.
+Due to limited time, it was very difficult for me to allocate time to design the code structure properly. 
+As a result, many parts of the code have an inappropriate structure and were intended to be temporary.
+
+= Completed =
+- Player input system
+- Time hop system
+- Inventory system
+- Combat system
+
+= Remaining to be done =
+- Camera system for make this game is 2D side-scrolling game.
+- Crafting system (Instant Crafting and Station Crafting)
+
+= Estimate of additional time needed =
+- More 1 day for complete camera and crafting system.
+But I think each system should have more time to structure its code better, such as large systems like Inventory and Combat system.
+
+= Next steps =
+- Add camera system
+- Add crafting system by implementing a function that calculates all items in the inventory and checks if an item can be craft when the player presses the craft button (e.g., if the player wants to craft a Storage Chest, press at the Storage Chest button in the crafting panel).
+- Add crafting data to collect the ingredients needed for each crafting item.
