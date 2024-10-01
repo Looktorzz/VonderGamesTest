@@ -3,6 +3,10 @@ using UnityEngine;
 public class CoreGame : Singleton<CoreGame>
 {
     [SerializeField]
+    private Player _player;
+    public Player Player => _player;
+
+    [SerializeField]
     private GameConfig _gameConfig;
     public GameConfig GameConfig => _gameConfig;
 
@@ -26,5 +30,11 @@ public class CoreGame : Singleton<CoreGame>
         _inventoryManager.Init();
         _timeHopController.Init();
         _timeHopUI.Setup();
+    }
+
+    // TODO: Create EnemyManager class or SpawnEnemyManager class instead
+    public void SpawnEnemy()
+    {
+        Instantiate(_gameConfig.Enemy, _gameConfig.EnemySpawnPosition, Quaternion.identity);
     }
 }

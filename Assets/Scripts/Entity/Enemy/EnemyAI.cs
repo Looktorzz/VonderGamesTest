@@ -14,16 +14,8 @@ public class EnemyAI : MonoBehaviour
     private void Start()
     {
         _idlePoint = this.transform.position;
-        GameObject gameObject = GameObject.FindWithTag(GameConfig.PlayerTag);
-        
-        if (!gameObject.TryGetComponent<Player>(out _player))
-        {
-            Debug.LogAssertion($"Player not found in scene.");
-        }
-        else
-        {
-            _playerTransform = _player.transform;
-        }
+        _player = CoreGame.Instance.Player;
+        _playerTransform = _player.transform;
 
         StartCoroutine(AttackRoutine());
     }
