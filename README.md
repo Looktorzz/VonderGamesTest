@@ -21,6 +21,10 @@ Solve by update text and destroy game object not script.
 
 01/10/2024
 20:30-21:30 | Implement base entity ( 1h )
+21:30-23:30 | Implement combat system ( 2h )
 
 = Inventory System =
 I've never made a game with an inventory system before, so it was quite challenging to manage the data and design the structure in this system.
+
+= Time =
+Due to limited time, it was very difficult for me to allocate time to design the code structure properly. As a result, many parts of the code have an inappropriate structure and were intended to be temporary.
