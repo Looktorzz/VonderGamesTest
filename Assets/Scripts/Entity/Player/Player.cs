@@ -1,15 +1,9 @@
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : BaseEntity
 {
     [SerializeField]
     private PlayerController _playerController;
-
-    [SerializeField]
-    private Rigidbody2D _rigidbody2D;
-
-    [SerializeField]
-    private float _speed = 5;
 
     private InteractableObject _interactableObject;
     private Vector2 _directionMove;
@@ -32,7 +26,7 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        _rigidbody2D.velocity = new Vector2(_directionMove.x * _speed, _rigidbody2D.velocity.y);
+        Rigidbody2D.velocity = new Vector2(_directionMove.x * Speed, Rigidbody2D.velocity.y);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -62,7 +56,7 @@ public class Player : MonoBehaviour
     {
         if (!_isJump)
         {
-            _rigidbody2D.AddForce(Vector2.up * _speed, ForceMode2D.Impulse);
+            Rigidbody2D.AddForce(Vector2.up * Speed, ForceMode2D.Impulse);
             _isJump = true;
         }
     }

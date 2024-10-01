@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 4871732010227905943}
   - component: {fileID: 2681376698016808302}
   - component: {fileID: 7473754445331769727}
+  - component: {fileID: 4193195163127670007}
   - component: {fileID: 1158068383022293038}
-  - component: {fileID: 2655000369139127793}
   m_Layer: 0
   m_Name: Slime
   m_TagString: Untagged
@@ -30,8 +30,8 @@ Transform:
   m_GameObject: {fileID: 7534084330744612098}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.78, y: -1.488617, z: -1}
-  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -160,6 +160,26 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &4193195163127670007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7534084330744612098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40204932221c13c4695d5578e77dc6cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Rigidbody2D: {fileID: 7473754445331769727}
+  MaxHp: 20
+  Damage: 3
+  Speed: 5
+  _detectionRange: 5
+  _attackRange: 2
+  _attackCooldown: 3
+  _smallSlimePrefab: {fileID: 4193195163127670007, guid: fb535dffd4a88a4408ce967c606aafa4, type: 3}
 --- !u!114 &1158068383022293038
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -172,15 +192,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 347b47e186f1654418c695553a293130, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rigidbody: {fileID: 7473754445331769727}
-  _speed: 5
-  _detectionRange: 5
-  _attackRange: 2
---- !u!222 &2655000369139127793
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7534084330744612098}
-  m_CullTransparentMesh: 1
+  _baseEnemy: {fileID: 4193195163127670007}

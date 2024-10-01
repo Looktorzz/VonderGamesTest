@@ -1,26 +1,10 @@
 using System.Collections;
 using UnityEngine;
 
-[RequireComponent(typeof(BoxCollider2D))]
-[RequireComponent(typeof(Rigidbody2D))]
 public class EnemyAI : MonoBehaviour
 {
-    // TODO: use attack function from enemy
-
     [SerializeField]
-    private Rigidbody2D _rigidbody;
-
-    [SerializeField]
-    private float _speed = 5f;
-
-    [SerializeField]
-    private float _detectionRange = 20f;
-
-    [SerializeField]
-    private float _attackRange = 5f;
-
-    private const float _idlePointRadius = 0.1f;
-    private const float _attackCooldown = 3f;
+    private BaseEnemy _baseEnemy;
 
     private Player _player;
     private Transform _playerTransform;
@@ -72,7 +56,7 @@ public class EnemyAI : MonoBehaviour
 
     private void Idle()
     {
-        if (IsWithinDistance(transform.position, _playerTransform.position, _detectionRange))
+        if (IsWithinDistance(transform.position, _playerTransform.position, _baseEnemy.DetectionRange))
         {
             _currentState = EnemyState.DetectPlayer;
         }
@@ -80,7 +64,7 @@ public class EnemyAI : MonoBehaviour
 
     private void DetectPlayer()
     {
-        if (!IsWithinDistance(transform.position, _playerTransform.position, _attackRange))
+        if (!IsWithinDistance(transform.position, _playerTransform.position, _baseEnemy.AttackRange))
         {
             _currentState = EnemyState.WalkToPlayer;
         }
@@ -92,13 +76,13 @@ public class EnemyAI : MonoBehaviour
 
     private void WalkToPlayer()
     {
-        MoveTowardsTarget(_playerTransform.position);
+        _baseEnemy.MoveTowardsTarget(_playerTransform.position);
 
-        if (IsWithinDistance(transform.position, _playerTransform.position, _attackRange))
+        if (IsWithinDistance(transform.position, _playerTransform.position, _baseEnemy.AttackRange))
         {
             _currentState = EnemyState.Attack;
         }
-        else if (!IsWithinDistance(transform.position, _playerTransform.position, _detectionRange))
+        else if (!IsWithinDistance(transform.position, _playerTransform.position, _baseEnemy.DetectionRange))
         {
             _currentState = EnemyState.ReturnToIdlePoint;
         }
@@ -106,7 +90,7 @@ public class EnemyAI : MonoBehaviour
 
     private void AttackPlayer()
     {
-        if (!IsWithinDistance(transform.position, _playerTransform.position, _attackRange))
+        if (!IsWithinDistance(transform.position, _playerTransform.position, _baseEnemy.AttackRange))
         {
             _currentState = EnemyState.WalkToPlayer;
         }
@@ -114,28 +98,17 @@ public class EnemyAI : MonoBehaviour
 
     private void ReturnToIdlePoint()
     {
-        MoveTowardsTarget(_idlePoint);
+        _baseEnemy.MoveTowardsTarget(_idlePoint);
 
-        if (IsWithinDistance(transform.position, _idlePoint, _idlePointRadius))
+        if (IsWithinDistance(transform.position, _idlePoint, BaseEnemy.IdlePointRadius))
         {
             _currentState = EnemyState.Idle;
         }
 
-        if (IsWithinDistance(transform.position, _playerTransform.position, _detectionRange))
+        if (IsWithinDistance(transform.position, _playerTransform.position, _baseEnemy.DetectionRange))
         {
             _currentState = EnemyState.DetectPlayer;
         }
-    }
-
-    private void Attack()
-    {
-        Debug.Log("Attacking the player!");
-    }
-
-    private void MoveTowardsTarget(Vector3 targetPosition)
-    {
-        Vector3 direction = (targetPosition - transform.position).normalized;
-        _rigidbody.MovePosition(transform.position + direction * _speed * Time.deltaTime);
     }
 
     private bool IsWithinDistance(Vector3 positionA, Vector3 positionB, float radius)
@@ -149,20 +122,21 @@ public class EnemyAI : MonoBehaviour
         {
             if (_currentState == EnemyState.Attack)
             {
-                Attack();
-                yield return new WaitForSeconds(_attackCooldown);
+                _baseEnemy.Attack(_player);
+                yield return new WaitForSeconds(_baseEnemy.AttackCooldown);
             }
 
             yield return null;
         }
     }
 
+    // For debug
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(transform.position, _detectionRange);
+        Gizmos.DrawWireSphere(transform.position, _baseEnemy.DetectionRange);
 
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, _attackRange);
+        Gizmos.DrawWireSphere(transform.position, _baseEnemy.AttackRange);
     }
 }
