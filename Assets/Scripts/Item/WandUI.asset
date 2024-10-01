@@ -10,10 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4bd776a9c231b6d44ac47f0c243487ab, type: 3}
-  m_Name: Wand
+  m_Name: WandUI
   m_EditorClassIdentifier: 
   _id: 1
   _itemName: Wand
   _itemSprite: {fileID: 21300000, guid: d921ff717fd80a449b6011e71bf0a8e3, type: 3}
   _maxStack: 1
   _itemType: 1
+  _itemPrefab: {fileID: 4524806734340306229, guid: 090854696a7caad409079f101018dd83, type: 3}

@@ -10,8 +10,8 @@ public class ProjectileBullet : MonoBehaviour
     private Rigidbody2D _rigidbody2D;
 
     private const float _speed = 5;
-    private const float _minDamage = 3;
-    private const float _maxDamage = 5;
+    private const int _minDamage = 3;
+    private const int _maxDamage = 5;
 
     private Vector2 _directionMove;
 
@@ -27,13 +27,17 @@ public class ProjectileBullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        // TODO: if other is enemy hurt enemy.
-        // TODO: hurt enemy by random damage 3-5.
-        Destroy(this.gameObject);
+        if (other.TryGetComponent(out BaseEnemy enemy))
+        {
+            int damage = Random.Range(_minDamage, _maxDamage + 1);
+            enemy.Hurt(damage);
+            Destroy(this.gameObject);
+        }
     }
 
-    public void Setup(Vector2 direction)
+    public void Setup(bool isLeftDirection)
     {
-        _directionMove = direction;
+        _directionMove = new Vector2();
+        _directionMove.x = isLeftDirection ? -1 : 1;
     }
 }

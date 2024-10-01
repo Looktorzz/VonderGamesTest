@@ -2,6 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+// TODO: Make this class is abstract class.
 [RequireComponent(typeof(Image))]
 [RequireComponent(typeof(CanvasGroup))]
 public class ItemUI : MonoBehaviour

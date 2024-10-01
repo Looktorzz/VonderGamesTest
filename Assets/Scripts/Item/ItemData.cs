@@ -23,4 +23,8 @@ public class ItemData : ScriptableObject
     [SerializeField]
     private ItemType _itemType;
     public ItemType ItemType => _itemType;
+
+    [SerializeField]
+    private GameObject _itemPrefab;
+    public GameObject ItemPrefab => _itemPrefab;
 }
