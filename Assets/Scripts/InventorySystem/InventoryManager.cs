@@ -1,6 +1,8 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEditor.Progress;
 
 public class InventoryManager : MonoBehaviour
 {
@@ -86,6 +88,9 @@ public class InventoryManager : MonoBehaviour
 
         _currentSelectedSlot = inventorySlot;
         _currentSelectedSlot.SetSelectBackgroundUI(true);
+
+        ItemData itemData = inventorySlot.HasItem ? inventorySlot.ItemUI.ItemData : null;
+        CoreGame.Instance.Player.SetCurrentHoldItem(itemData);
     }
 
     public void TestSpawnItemUI()

@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider2D))]
@@ -6,6 +7,10 @@ public abstract class BaseEntity : MonoBehaviour
 {
     [SerializeField]
     protected Rigidbody2D Rigidbody2D;
+
+    // TODO: Shoud have class for manage UI
+    [SerializeField]
+    protected TextMeshPro HpLabel;
 
     [SerializeField]
     protected int MaxHp = 20;
@@ -33,19 +38,20 @@ public abstract class BaseEntity : MonoBehaviour
     protected virtual void ReduceHp(int damage)
     {
         Hp -= damage;
-        Debug.Log($"{this.name} hp remaining : {Hp}");
 
         if (Hp <= 0)
         {
             Hp = 0;
             Dead();
         }
+
+        HpLabel.text = Hp.ToString();
     }
 
     protected virtual void ResetHp()
     {
         Hp = MaxHp;
-        Debug.Log($"{this.name} Reset to max hp : {Hp}/{MaxHp}");
+        HpLabel.text = Hp.ToString();
     }
 
     protected virtual void Dead()
